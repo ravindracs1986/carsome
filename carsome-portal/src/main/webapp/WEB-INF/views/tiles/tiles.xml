@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+
+<tiles-definitions>  
+ 
+   <!-- Base Definition -->
+   <definition name="base-definition" 
+       template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />  
+       <put-attribute name="defaultBlog" value="/WEB-INF/views/tiles/template/defaultBlogDetails.jsp" /> 
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
+   </definition>  
+ 
+ <!-- Base Definition -->
+   <definition name="base-admin-definition" 
+       template="/WEB-INF/views/tiles/layouts/defaultAdminLayout.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="adminHeader" value="/WEB-INF/views/tiles/template/defaultAdminHeader.jsp" />  
+      <!--  <put-attribute name="defaultBlog" value="/WEB-INF/views/tiles/template/defaultBlogDetails.jsp" />  -->
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
+   </definition> 
+ 
+ 
+   <!-- Home Page -->
+   <definition name="home" extends="base-definition">  
+       <put-attribute name="title" value="Home" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/home.jsp" />  
+   </definition>  
+   
+   
+   
+    <!-- About Page -->
+   <definition name="about" extends="base-definition">  
+       <put-attribute name="title" value="About" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/about.jsp" />  
+   </definition> 
+   
+    <!-- Contact Page -->
+   <definition name="contact" extends="base-definition">  
+       <put-attribute name="title" value="Contact" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/contact.jsp" />  
+   </definition> 
+   
+   
+   
+   <!-- success Page -->
+   <definition name="success" extends="base-definition">  
+       <put-attribute name="title" value="Success" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/success.jsp" />  
+   </definition> 
+   
+   <!-- multiSuccess Page -->
+   <definition name="multiSuccess" extends="base-definition">  
+       <put-attribute name="title" value="Success" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/multiSuccess.jsp" />  
+   </definition> 
+
+    <!-- success Page -->
+   <definition name="popup" extends="base-definition">  
+       <put-attribute name="title" value="Success" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/popup.jsp" />  
+   </definition> 
+ 
+</tiles-definitions>
