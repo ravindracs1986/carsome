@@ -147,11 +147,12 @@ public class AppController {
 		String strDate=dateSlot.split("\\_")[0]; 
 		//SimpleDateFormat date_format = new SimpleDateFormat("HH:mm:ss");
 		System.out.println("strDate-->>" +strDate);
+		String startTime = "09:00:00";
+		int totalSlotWk=(perdayTotaltime/(Integer.parseInt(diviTime)))*(Integer.parseInt(weknSlot));
+		//int addTime=perdayTotaltime/totalSlotWk;
+		
 		if(category!=null && !StringUtils.isEmpty(category) && category.equalsIgnoreCase("WEK")){
 			//2 inspection slot every 30mins, from 9AM to 6PM
-			String startTime = "09:00:00";
-			int totalSlotWk=(perdayTotaltime/(Integer.parseInt(diviTime)))*(Integer.parseInt(weknSlot));
-			//int addTime=perdayTotaltime/totalSlotWk;
 			double addTime = (double) perdayTotaltime / totalSlotWk;
 			String strTime=String.valueOf(addTime);
 			String mint = strTime.split("\\.")[0]; 
@@ -160,19 +161,7 @@ public class AppController {
 			Date d;
 			try {
 				Date reqDate=DateUtil.getFormatDate(strDate, "yyyy-MM-dd");
-				List<Inspection> dbInspection=inspectionService.findbyslotDate(reqDate);
-				if(dbInspection!=null && dbInspection.size()>0) {
-					for(Inspection objTemp:dbInspection) {
-						Date date = new Date(objTemp.getSlotStartTime().getTime());
-						Calendar c1Temp = Calendar.getInstance();
-						c1Temp.setTime(date);
-						dbList.add(df.format(c1Temp.getTime()));
-						
-						
-					}
-				}
-				
-				
+				dbList =getExistingRecordsFromDatabase(reqDate);
 				for(int i=1;i<=totalSlotWk;i++) {
 					d = df.parse(startTime);
 					Calendar cal = Calendar.getInstance();
@@ -193,7 +182,7 @@ public class AppController {
 				
 				 
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				logger.info("ParseException##" +e.getMessage());
 				e.printStackTrace();
 			} 
 			
@@ -208,21 +197,10 @@ public class AppController {
 			String mint = strTime.split("\\.")[0]; 
 			String secnd = strTime.split("\\.")[1];
 			int actSec=(Integer.parseInt(secnd)*60)/10;
-			
 			Date d;
-			String startTime = "09:00:00";
 			try {
 				Date reqDate=DateUtil.getFormatDate(strDate, "yyyy-MM-dd");
-				List<Inspection> dbInspection=inspectionService.findbyslotDate(reqDate);
-				
-				if(dbInspection!=null && dbInspection.size()>0) {
-					for(Inspection objTemp:dbInspection) {
-						Date date = new Date(objTemp.getSlotStartTime().getTime());
-						Calendar c1Temp = Calendar.getInstance();
-						c1Temp.setTime(date);
-						dbList.add(df.format(c1Temp.getTime()));
-					}
-				}
+				dbList =getExistingRecordsFromDatabase(reqDate);
 				
 				for(int i=1;i<=totalSlotSat;i++) {
 					d = dfSat.parse(startTime);
@@ -245,7 +223,7 @@ public class AppController {
 				
 				 
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				logger.info("ParseException##" +e.getMessage());
 				e.printStackTrace();
 			} 
 			
@@ -253,8 +231,32 @@ public class AppController {
 		return dateSlots;
 	}
 	
+	/**
+	 * private method for service call
+	 * @param reqDate
+	 * @return
+	 */
 	
-	
+	private List<String> getExistingRecordsFromDatabase(Date reqDate) {
+		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+		List<String> dbList=new ArrayList<>();
+		List<Inspection> dbInspection=inspectionService.findbyslotDate(reqDate);
+		if(dbInspection!=null && dbInspection.size()>0) {
+			for(Inspection objTemp:dbInspection) {
+				Date date = new Date(objTemp.getSlotStartTime().getTime());
+				Calendar c1Temp = Calendar.getInstance();
+				c1Temp.setTime(date);
+				dbList.add(df.format(c1Temp.getTime()));
+				
+				
+			}
+		}
+		
+		return dbList;
+		
+	}
+
+
 	@RequestMapping(value = {"/saveslots"}, method = RequestMethod.POST)
 	public ModelAndView saveslots(ModelMap model,HttpServletRequest request, HttpServletResponse response,@RequestParam String slotCategory,
 			@RequestParam String slotDate,@RequestParam String slotTime,
@@ -316,7 +318,7 @@ public class AppController {
 			inspectionService.createInspectionSlot(inspection);
 			mav.addAllObjects(PopupBox.success(null, null,"Slot booked Successfully","home"));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			logger.info("saveslots method ParseException##" +e.getMessage());
 			e.printStackTrace();
 		}
 		
