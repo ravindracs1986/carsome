@@ -30,8 +30,7 @@
 							<div class="woocommerce-info"><b>Want to book inspection slot?</b></div>
 							<p style="-webkit-text-decoration-color: red; text-decoration-color: red;text-decoration: underline red;">Note:inspection slot can book for next 3 weeks counting from next day</p>
 							<form class="checkout_coupon" >
-
-								<div class="form-row">
+									<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="category">Category:</label> <select id="category" class="form-control" name="category">
 											<option selected>Please Select</option>
@@ -49,13 +48,28 @@
 										</select>
 									</div>
 								</div>
+								<!--  <div class="col-md-4 col-sm-6">
 								<input type="submit" value="Show Slots"
-									class="button btn btn-primary" style="margin: 10px 10px 10px 995px;" id="showSlotId"/><br>
-
+									class="button btn btn-primary" style="" id="showSlotId"/><br>
+								</div> -->
+								
+								<div class="row">
+								  <div class="col-sm-12">
+								      <div class="pull-right">
+								           <input type="submit" value="Show Slots"
+									class="button btn btn-primary" style="" id="showSlotId"/>
+								      </div>
+								  </div>
+								</div>
+								
 							</form>
 						</div>
+				</div>
+				</div>
+				</div>
+				<div class="col-md-12"></div>
 					<!-- showing slots starts -->
-					<div id="timeslotDiv" style="display:none">
+					<div id="timeslotDiv" style="display:none;margin-top: 10px;">
 					<form class="checkout_coupon" name="bookForm" id="bookFormId" onsubmit="return validateForm()" method="post" action="${pageContext.request.contextPath}/saveslots">
 						<div class="woocommerce-info">Choose slots by clicking the corresponding slot in the layout below:</div>
 		                    <div class="woocommerce" >
@@ -91,8 +105,18 @@
 		                    
 		                <!-- showing slots end -->  
 		               <!-- <button type="button" class="button btn btn-primary" style="margin: 10px 10px 10px 966px;" value="BookSlot" id="bookSlotId">BookSlot</button>  -->
-		                 <input type="submit" value="BookSlot"
+		                 <!-- <input type="submit" value="BookSlot"
+									class="button btn btn-primary" style="margin: 10px 10px 10px 1011px;" id="bookSlotId1"/><br>  -->
+		              
+		              <div class="row">
+								  <div class="col-sm-12">
+								      <div class="pull-right">
+								           <input type="submit" value="Book Slot"
 									class="button btn btn-primary" style="margin: 10px 10px 10px 1011px;" id="bookSlotId1"/><br> 
+								      </div>
+								  </div>
+								</div>
+		              
 		                 
 					</div><!-- second div -->
 					<input type="hidden" id="slotCategory" name="slotCategory" value="">
@@ -102,10 +126,10 @@
 					 <div id="msgLogin">
 		                <% //out.println(MsgLogin); %>
 		            </div>
-					</div>
-				</div>
-			</div>
-		</div>
+					</div><!--End showing slots starts -->
+				
+			
+		
 	</div>
 	
 </div>
