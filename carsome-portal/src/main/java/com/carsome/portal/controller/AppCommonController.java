@@ -47,7 +47,12 @@ public class AppCommonController {
 		ModelAndView mav =new ModelAndView("popup");
 		if(subEmail!=null && !StringUtils.isEmpty(subEmail)){
 			SubsorContacts subsorContacts = new SubsorContacts();
+			subsorContacts.setEmail(subEmail);
 			subsorContacts.setSubEmail(subEmail);
+			subsorContacts.setSubject("Subscription");
+			subsorContacts.setMessage("Subscription email");
+			subsorContacts.setName("Subscription");
+			subsorContacts.setPhone("");
 			subsorContacts.setCrtTs(DateUtil.getSQLTimestamp());
 			suborContactService.create(subsorContacts);
 			mav.addAllObjects(PopupBox.success(null, null,"Subscription Completed Successfully","home"));

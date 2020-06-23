@@ -37,28 +37,28 @@ public class SubsorContacts extends AbstractEntity implements java.io.Serializab
 	@Id
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@GeneratedValue(generator = "generator")
-	@Column(name = "id", nullable = false)
+	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "subscribe_email", nullable = false)
+	@Column(name = "subscribe_email")
 	private String subEmail;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name")
 	private String name;
 
-	@Column(name = "phone", nullable = false)
+	@Column(name = "phone")
 	private String phone;
 
-	@Column(name = "email", nullable = false)
+	@Column(name = "email")
 	private String email;
 
-	@Column(name = "subject", nullable = false)
+	@Column(name = "subject")
 	private String subject;
 
-	@Column(name = "message", nullable = false)
+	@Column(name = "message")
 	private String message;
 
-	@Column(name = "crt_ts", nullable = false, length = 50)
+	@Column(name = "crt_ts")
 	private Timestamp crtTs;
 
 	
